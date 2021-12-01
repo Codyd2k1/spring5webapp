@@ -24,29 +24,37 @@ public class BootStrapData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Publisher garfieldPublisher = new Publisher("New York", "New York", "54221", "garfieldPublishing");
+
+        publisherRepository.save(garfieldPublisher);
+
+
         Author eric = new Author("Eric", "Evans");
         Book magicTreeHouse = new Book("The Dragons Lair", "123456");
         eric.getBooks().add(magicTreeHouse);
         magicTreeHouse.getAuthors().add(eric);
-
+        magicTreeHouse.setPublisher(garfieldPublisher);
+        garfieldPublisher.getBooksPublished().add(magicTreeHouse);
         authorRepository.save(eric);
         bookRepository.save(magicTreeHouse);
+        publisherRepository.save(garfieldPublisher);
 
         Author steve = new Author("Steve", "Nash");
         Book passingMagic = new Book("Art of the Pass", "456123");
         steve.getBooks().add(passingMagic);
         passingMagic.getAuthors().add(steve);
+        passingMagic.setPublisher(garfieldPublisher);
+        garfieldPublisher.getBooksPublished().add(passingMagic);
 
         authorRepository.save(steve);
         bookRepository.save(passingMagic);
-
-        Publisher garfieldPublisher = new Publisher("New York", "New York", "54221", "garfieldPublishing");
-
         publisherRepository.save(garfieldPublisher);
+
 
         System.out.println("Started in Bootstrap");
         System.out.println("Number of authors: " + authorRepository.count());
         System.out.println("Number of books: " + bookRepository.count());
         System.out.println("Number of publishers: " + publisherRepository.count());
+        System.out.println("Number of published books: " + garfieldPublisher.getBooksPublished().size());
     }
 }
