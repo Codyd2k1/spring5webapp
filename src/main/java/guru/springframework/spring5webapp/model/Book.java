@@ -20,10 +20,7 @@ public class Book {
     public Book() {
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
+
 
     public Book(Long id, String title, String isbn, Set<Author> authors) {
         this.id = id;
@@ -70,6 +67,11 @@ public class Book {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
         return id.equals(book.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
 }
