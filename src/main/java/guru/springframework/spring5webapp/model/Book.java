@@ -14,6 +14,17 @@ public class Book {
     private String isbn;
 
     @ManyToOne
+    private Tree tree;
+
+    public Tree getTree() {
+        return tree;
+    }
+
+    public void setTree(Tree tree) {
+        this.tree = tree;
+    }
+
+    @ManyToOne
     private Publisher publisher;
 
     @ManyToMany
